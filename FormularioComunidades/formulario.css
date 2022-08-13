@@ -1,0 +1,15 @@
+label{
+    display:flex;
+    margin-top:10px;
+}
+
+button{
+    display:flex;
+    margin-top: 10px;
+    color:blue;
+    border-color:blue;
+}
+
+.cajabuscar{
+    display:flex;
+}

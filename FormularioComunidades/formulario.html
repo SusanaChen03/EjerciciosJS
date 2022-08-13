@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="formulario.css">
+    <script src="formulario.js"></script>
+</head>
+<body onload="cargaInicial()">
+    <h1>Rellena el formulario</h1>
+  
+        <label for="nombre">Ingresa tu nombre</label>
+        <input type="text" id="nombre">
+
+        <label for="email">Email</label>
+        <input type="email" id="email">
+
+        <label for="activo">activo</label>
+        <input type="text" id="activo">
+
+        <label for="codCCAA">Comunidad Autonóma</label>
+        <select name="selecCCAA"  id="selecCCAA" onchange="cargarProvincias()">
+                <option id="comunidades"></option>
+        </select>
+
+        <label for="codProv">Provincia</label>
+        <select name="selecProvincia" id="selecProvincia">
+                <option value=""></option>
+        </select>
+
+        <label for="nombreUsuario">Nombre usuario</label>
+        <input type="text" id="nombreUsuario">
+
+        <button id="botonGuardar" onclick="guardarDatos()">Guardar Datos</button>
+    </br>
+    <table id="tablaUsuario">
+
+    </table>
+    </br>
+
+
+    <div class="cajaBuscar">
+        <input id="text" id="insetar"></input>
+        <button id="botonFiltro" onclick="filtrar()">Buscar</button>
+    </div>
+
+</body>
+</html>
+
+
+</br>
