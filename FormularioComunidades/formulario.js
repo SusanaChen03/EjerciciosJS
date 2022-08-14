@@ -270,4 +270,15 @@ function filtrarPorNombre() {
   pintarFilaUsuarios(arrayFiltrado);
 }
 
-function filtrarPorCCAA() {}
+function filtrarPorCCAA() {
+  let nuevoArraycomunidad = [];
+
+  for (let element of ColeccionUsuarios) {
+    let resultado = element.codCCAA.includes("01");
+
+    if (resultado == true) {
+      nuevoArraycomunidad.push(element);
+    }
+  }
+  pintarFilaUsuarios(nuevoArraycomunidad);
+}
