@@ -33,7 +33,7 @@
         <label for="nombreUsuario">Nombre usuario</label>
         <input type="text" id="nombreUsuario">
 
-        <button id="botonGuardar" onclick="guardarDatos()">Guardar Datos</button>
+        <button class="botonGuardar" id="botonGuardar" onclick="guardarDatos()">Guardar Datos</button>
     </br>
     <table id="tablaUsuario">
 
@@ -42,9 +42,11 @@
 
 
     <div class="cajaBuscar">
-        <input id="text" id="insetar"></input>
-        <button id="botonFiltro" onclick="filtrar()">Buscar</button>
+        <input type="text" id="valorABuscar"></input>
+        <button class="botonBuscar" id="botonFiltro" onclick="filtrarPorNombre()">Buscar Por Nombre</button>
     </div>
+
+    <button class="botonBuscarCCAA" id="buscarXCCAA" onclick="filtrarPorCCAA()">Buscar por Andalucía</button>
 
 </body>
 </html>

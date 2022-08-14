@@ -76,7 +76,7 @@ let ColeccionUsuarios = [
     NombreUsuario: "Jose Villanueva",
     Email: "jose@gmail.com",
     Activo: true,
-    codCCAA: 01,
+    codCCAA: "02",
     codProv: 1,
     nombreUsuario: "sirneo",
   },
@@ -84,7 +84,7 @@ let ColeccionUsuarios = [
     NombreUsuario: "Susana Chen",
     Email: "susana@gmail.com",
     Activo: true,
-    codCCAA: 01,
+    codCCAA: "01",
     codProv: 1,
     nombreUsuario: "missu",
   },
@@ -92,7 +92,7 @@ let ColeccionUsuarios = [
     NombreUsuario: "Estrella Chen",
     Email: "estrella@gmail.com",
     Activo: true,
-    codCCAA: 01,
+    codCCAA: "01",
     codProv: 1,
     nombreUsuario: "estrell",
   },
@@ -100,15 +100,16 @@ let ColeccionUsuarios = [
     NombreUsuario: "Jose Chen",
     Email: "josito@gmail.com",
     Activo: true,
-    codCCAA: 01,
+    codCCAA: "05",
     codProv: 1,
     nombreUsuario: "villachen",
-  }
+  },
 ];
 
 // funcion para borrar los datos seleccionados
 function removeOptions(selectElement) {
-  var i, L = selectElement.options.length - 1;
+  var i,
+    L = selectElement.options.length - 1;
   for (i = L; i >= 0; i--) {
     selectElement.remove(i);
   }
@@ -126,35 +127,52 @@ function cargaInicial() {
     opt.innerHTML = CCAA[i].nombre;
     select.appendChild(opt);
   }
-  cargarFilaUsuarios();
+  pintarFilaUsuarios(ColeccionUsuarios);
 }
 
-//funcion para que se cargue los datos dentro de la tabla, de los registros realizados 
-function cargarFilaUsuarios(){
-  
-  document.getElementById('tablaUsuario').insertRow(-1).innerHTML ='<tr>'+
-  '<td>#</td>'+
-  '<td>Nombre</td>' +
-  '<td>Email</td>' +
-  '<td>Cod.Comunidad</td>' +
-  '<td>Cod.Provincia</td>' +
-  '<td>Nombre de Usuario</td>' +
-  '</tr>';
+//funcion para que se cargue los datos dentro de la tabla, de los registros realizados
+function pintarFilaUsuarios(arrayGeneral) {
+  let arrayFilas = document.querySelectorAll("#tablaUsuario tbody tr"); // coleccionUsuarios = [{...},{...},{...}, ...]
 
-  for(let i=0; i<ColeccionUsuarios.length; i++){
+  arrayFilas.forEach(function (element) {
+    element.remove();
+  });
 
-    document.getElementById('tablaUsuario').insertRow(-1).innerHTML =  '<td id="'+ColeccionUsuarios[i].nombreUsuario+'"><button onclick="eliminarFila(\''+ ColeccionUsuarios[i].nombreUsuario+'\')">X</button></td>'+
-    '<td>'+ ColeccionUsuarios[i].NombreUsuario +'</td>'+
-    '<td>'+ ColeccionUsuarios[i].Email +'</td>'+
-    '<td>'+ ColeccionUsuarios[i].codCCAA +'</td>'+
-    '<td>'+ ColeccionUsuarios[i].codProv +'</td>'+
-    '<td>'+ ColeccionUsuarios[i].nombreUsuario +'</td>';
+  document.getElementById("tablaUsuario").insertRow(-1).innerHTML =
+    "<tr>" +
+    "<td>#</td>" +
+    "<td>Nombre</td>" +
+    "<td>Email</td>" +
+    "<td>Cod.Comunidad</td>" +
+    "<td>Cod.Provincia</td>" +
+    "<td>Nombre de Usuario</td>" +
+    "</tr>";
 
+  for (let i = 0; i < arrayGeneral.length; i++) {
+    document.getElementById("tablaUsuario").insertRow(-1).innerHTML =
+      '<td id="' +
+      arrayGeneral[i].nombreUsuario +
+      '"><button onclick="eliminarFila(\'' +
+      arrayGeneral[i].nombreUsuario +
+      "')\">X</button></td>" +
+      "<td>" +
+      arrayGeneral[i].NombreUsuario +
+      "</td>" +
+      "<td>" +
+      arrayGeneral[i].Email +
+      "</td>" +
+      "<td>" +
+      arrayGeneral[i].codCCAA +
+      "</td>" +
+      "<td>" +
+      arrayGeneral[i].codProv +
+      "</td>" +
+      "<td>" +
+      arrayGeneral[i].nombreUsuario +
+      "</td>";
   }
-  console.log('datos usuarios' +cargarFilaUsuarios);
+  console.log("datos usuarios" + pintarFilaUsuarios);
 }
-
-
 
 function cargarProvincias() {
   let valorSeleccionado = document.getElementById("selecCCAA").value;
@@ -206,23 +224,23 @@ function guardarDatos() {
   if (nuevoUsuario != null) {
     ColeccionUsuarios.push(nuevoUsuario);
   }
-
+  //borrar el contenido de los input una vez guardados
   document.getElementById("nombre").value = "";
   document.getElementById("email").value = "";
   document.getElementById("activo").value = "";
   document.getElementById("selecCCAA").value = "";
   document.getElementById("selecProvincia").value = "";
   document.getElementById("nombreUsuario").value = "";
-  
-  let arrayFilas = document.querySelectorAll('#tablaUsuario tbody tr');  // coleccionUsuarios = [{...},{...},{...}, ...]
 
-  arrayFilas.forEach(function(element){
+  let arrayFilas = document.querySelectorAll("#tablaUsuario tbody tr"); // coleccionUsuarios = [{...},{...},{...}, ...]
+
+  arrayFilas.forEach(function (element) {
     element.remove();
   });
 
   cargarFilaUsuarios();
 
-
+  // INSERTAR UNA NUEVA LINEA CON LOS DATOS NUEVOS
   // document.getElementById('tablaUsuario').insertRow(-1).innerHTML =  '<td></td>'+
   // '<td>'+ nuevoUsuario.NombreUsuario+'</td>'+
   // '<td>'+ nuevoUsuario.Email +'</td>'+
@@ -231,9 +249,25 @@ function guardarDatos() {
   // '<td>'+ nuevoUsuario.nombreUsuario +'</td>';
 }
 
-
-function eliminarFila(elementoId){
-
-  document.querySelectorAll('#tablaUsuario td[id="'+elementoId+'"]').forEach(element => element.parentElement.remove())
-
+function eliminarFila(elementoId) {
+  document
+    .querySelectorAll('#tablaUsuario td[id="' + elementoId + '"]')
+    .forEach((element) => element.parentElement.remove());
 }
+
+function filtrarPorNombre() {
+  let arrayFiltrado = [];
+
+  let buscarPor = document.getElementById("valorABuscar").value;
+
+  ColeccionUsuarios.forEach(function (element) {
+    let resultado = element.NombreUsuario.includes(buscarPor);
+    if (resultado == true) {
+      arrayFiltrado.push(element);
+    }
+  });
+
+  pintarFilaUsuarios(arrayFiltrado);
+}
+
+function filtrarPorCCAA() {}

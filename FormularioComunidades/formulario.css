@@ -3,7 +3,7 @@ label{
     margin-top:10px;
 }
 
-button{
+.botonGuardar{
     display:flex;
     margin-top: 10px;
     color:blue;
@@ -11,5 +11,16 @@ button{
 }
 
 .cajabuscar{
-    display:flex;
+    display:inline-block;
+}
+
+.botonBuscar{
+    color:blue;
+    border-color:blue;
+}
+
+.botonBuscarCCAA{
+    margin-top: 10px;
+    color:blue;
+    border-color:blue;
 }
